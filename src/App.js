@@ -14,7 +14,7 @@ import Code from './components/Code'
 import CodeBlocksMenu from './components/CodeBlocksMenu'
 import { task0 } from './constants/tasks/task0'
 
-function App() {
+const App = () => {
   const [checkedStagesId, setCheckedStagesId] = useState([])
   const [isResultVisible, setIsResultVisible] = useState({
     errors: [],
@@ -43,7 +43,7 @@ function App() {
       <Typography variant="h5" gutterBottom>
         {task0.title}
       </Typography>
-      <Grid container spacing={2}>
+      <Grid container spacing={2}>        
         <Grid item xs={12} lg={4}>
           <Typography variant="h6" gutterBottom>
             Вибір блоків
@@ -92,27 +92,26 @@ function App() {
             </>
           )}
         </Grid>
+        {isResultVisible.value && (
+          <Grid item xs={12}>
+            <Typography variant="h6" gutterBottom>
+              Результат виконання
+            </Typography>
+            <Box sx={{ display: 'inline-block' }}>
+              <img
+                style={{
+                  overflow: 'auto',
+                  height: '100%',
+                  width: '100%',
+                  objectFit: 'contain',
+                }}
+                src={task0.result.value}
+                alt={task0.title}
+              />
+            </Box>
+          </Grid>
+        )}
       </Grid>
-
-      {isResultVisible.value && (
-        <Box>
-          <Typography variant="h6" gutterBottom>
-            Результат виконання
-          </Typography>
-          <Box sx={{ display: 'inline-block' }}>
-            <img
-              style={{
-                overflow: 'auto',
-                height: '100%',
-                width: '100%',
-                objectFit: 'contain',
-              }}
-              src={task0.result.value}
-              alt={task0.title}
-            />
-          </Box>
-        </Box>
-      )}
     </Container>
   )
 }
