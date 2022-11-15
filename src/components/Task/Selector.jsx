@@ -23,31 +23,31 @@ export const Selector = ({ task, checkedStagesId, isResultVisible, setIsResultVi
       }    
 
   return (
-   <>
-    <Typography variant="h6" gutterBottom>
-                Вибір блоків
-            </Typography>
-            <CodeBlocksMenu
-                taskCodeBlocks={task.codeBlocks}
-                checkedStagesId={checkedStagesId}
-                setCheckedStagesId={setCheckedStagesId}
-            />
-            <Box my={2}>
-                <Button
-                variant="contained"
-                startIcon={<PlayArrow />}
-                fullWidth
-                onClick={handleShowResult}
-                >
-                Запуск коду
-                </Button>
-                <Stack spacing={2} mt={2}>
-                {isResultVisible.errors.length >= 1 &&
-                    isResultVisible.errors.map((error) => (
-                    <Alert severity="error">{error}</Alert>
-                    ))}
-                </Stack>
-            </Box>
+    <>
+      <Typography variant="h6" gutterBottom>
+        Вибір блоків
+      </Typography>
+      <CodeBlocksMenu
+        taskCodeBlocks={task.codeBlocks}
+        checkedStagesId={checkedStagesId}
+        setCheckedStagesId={setCheckedStagesId}
+      />
+      <Box my={2}>
+        <Button
+          variant="contained"
+          startIcon={<PlayArrow />}
+          fullWidth
+          onClick={handleShowResult}
+        >
+          Запуск коду
+        </Button>
+        <Stack spacing={2} mt={2}>
+          {isResultVisible.errors.length >= 1 &&
+            isResultVisible.errors.map((error) => (
+              <Alert severity="error">{error}</Alert>
+            ))}
+        </Stack>
+      </Box>
     </>
   )
 }

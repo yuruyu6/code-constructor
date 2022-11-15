@@ -26,6 +26,7 @@ export const task0 = {
       id: 1,
       title: 'Заповнення матриці випадковими числами, виведення на екран',
       code: `
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                 for (i = 0; i < number; i++)
                     for (j = 0; j < number; j++)
                         mas[i, j] = rnd.Next(-10, 10);
@@ -44,6 +45,7 @@ export const task0 = {
       id: 2,
       title: 'Встановлення потоків',
       code: `
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                 Console.WriteLine("\nProcessor=" + Environment.ProcessorCount);
                 ThreadPool.GetMaxThreads(out workerThreads, out portThreads);
                 Console.WriteLine("\nMaximum worker threads: \t{0}" + "\nMaximum completion port threads: {1}",
@@ -65,6 +67,7 @@ export const task0 = {
       id: 3,
       title: 'Створення пулу потоків',
       code: `
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                 Console.WriteLine("\nstart time=" + DateTime.Now.Millisecond);
                 for (i = 0; i < mas.GetLength(0); i++)
                 {
@@ -80,6 +83,7 @@ export const task0 = {
       id: 4,
       title: 'Функція обчислення елементів рядка матриці',
       code: `
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             public static void Function(object instance)
             {
                 int line = (int)instance, result = 1, i;
@@ -92,7 +96,6 @@ export const task0 = {
                 }
                 Thread.Sleep(500);
                 Console.WriteLine("line number= " + (line + 1) + " result= " + result);
-    
             }
         }
     `,
