@@ -8,7 +8,7 @@ export const CodeViewer = ({ checkedStagesId, task }) => {
   const mappedCodeLines = task.codeBlocks
     .filter((stage) => checkedStagesId.includes(stage.id))
     .map((stage) =>
-      stage.code.replace(/("\n)/gm, '"\\n').replace(/(\t)/gm, '\\t')
+      `\r //${stage.title}` + stage.code.replace(/("\n)/gm, '"\\n').replace(/(\t)/gm, '\\t')
     )
     .join('')
 

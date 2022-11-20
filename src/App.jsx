@@ -3,35 +3,35 @@ import { Box, Tab, Tabs } from '@mui/material'
 import { useState } from 'react'
 import TabPanel from './components/TabPannel'
 import { TaskBlock } from './components/Task/TaskBlock'
-import { task0 } from './constants/tasks/task0'
-import { task1 } from './constants/tasks/task1'
+import tasksList from './constants/tasks'
 
 const App = () => {
-  const [value, setValue] = useState(0)
+  const [tab, setTab] = useState(0)
 
-  const handleChange = (event, newValue) => {
-    setValue(newValue)
+  const handleChange = (_, tabId) => {
+    setTab(tabId)
   }
 
   return (
     <>
       <Box sx={{ width: '100%' }}>
         <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-          <Tabs value={value} onChange={handleChange}>
-            <Tab label="Task 1" />
-            <Tab label="Task 2" />
-            <Tab label="Task 3" />
+          <Tabs value={tab} onChange={handleChange} centered>
+            {tasksList.map((task) => (
+              <Tab
+                key={task.id}
+                label={`ЛР ${task.id + 1}`}
+                value={task.id}
+                wrapped
+              />
+            ))}
           </Tabs>
         </Box>
-        <TabPanel value={value} index={0}>
-          <TaskBlock task={task0} />
-        </TabPanel>
-        <TabPanel value={value} index={1}>
-          <TaskBlock task={task1} />
-        </TabPanel>
-        <TabPanel value={value} index={2}>
-          Item Three
-        </TabPanel>
+        {tasksList.map((task) => (
+          <TabPanel key={task.id} value={tab} index={task.id}>
+            <TaskBlock task={task} />
+          </TabPanel>
+        ))}
       </Box>
     </>
   )
