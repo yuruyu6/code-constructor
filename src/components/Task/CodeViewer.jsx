@@ -1,44 +1,42 @@
+import { ContentCopy } from '@mui/icons-material'
 import { Box, Card, Typography } from '@mui/material'
 import React from 'react'
-import { CommonBtn } from '../CommonBtn'
+import { CommonBtn as Button } from '../CommonBtn'
 import Code from './Code'
 
 export const CodeViewer = ({ checkedStagesId, task }) => {
-
-  let mappedCodeLines = task.codeBlocks
+  const mappedCodeLines = task.codeBlocks
     .filter((stage) => checkedStagesId.includes(stage.id))
     .map((stage) =>
       stage.code.replace(/("\n)/gm, '"\\n').replace(/(\t)/gm, '\\t')
     )
     .join('')
 
-    const Copy = (text) => {
-      var input = document.createElement('textarea');
-      input.innerHTML = text;
-      document.body.appendChild(input);
-      input.select();
-      var result = document.execCommand('copy');
-      document.body.removeChild(input);
-      return result;
+  const onClickCopyButton = () => {
+    if (!navigator.clipboard) {
+      return
+    }
+
+    navigator.clipboard.writeText(mappedCodeLines)
   }
 
-  console.log(mappedCodeLines);
   return (
     <>
       {checkedStagesId.length > 0 && (
         <>
-        <Box sx={{display: "flex", justifyContent: "space-between"}}>
-        <Typography variant="h6" gutterBottom>
-            Перегляд коду
-          </Typography>
-          <CommonBtn onClick={() => Copy(mappedCodeLines)}>
-            Скопіювати
-          </CommonBtn>
-        </Box>
+          <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
+            <Typography variant="h6" gutterBottom>
+              Перегляд коду
+            </Typography>
+            <Button
+              startIcon={<ContentCopy />}
+              onClick={() => onClickCopyButton()}
+            >
+              Скопіювати
+            </Button>
+          </Box>
           <Card>
-            <Code
-              code={mappedCodeLines}
-            />
+            <Code code={mappedCodeLines} />
           </Card>
         </>
       )}

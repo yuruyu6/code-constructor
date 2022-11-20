@@ -3,24 +3,29 @@ import { Alert, Box, Button, Stack, Typography } from '@mui/material'
 import React from 'react'
 import CodeBlocksMenu from './CodeBlocksMenu'
 
-export const Selector = ({ task, checkedStagesId, isResultVisible, setIsResultVisible, setCheckedStagesId }) => {
+export const Selector = ({
+  task,
+  checkedStagesId,
+  isResultVisible,
+  setIsResultVisible,
+  setCheckedStagesId,
+}) => {
+  const checkIsAllRequiredStagesChecked = () => {
+    return task.codeBlocks
+      .filter((codeBlock) => codeBlock.required === true)
+      .every((requiredBlock) => checkedStagesId.includes(requiredBlock.id))
+  }
 
-    const checkIsAllRequiredStagesChecked = () => {
-        return task.codeBlocks
-          .filter((codeBlock) => codeBlock.required === true)
-          .every((requiredBlock) => checkedStagesId.includes(requiredBlock.id))
-      }
-    
-      const handleShowResult = () => {
-        if (checkIsAllRequiredStagesChecked()) {
-          setIsResultVisible({ errors: [], value: true })
-        } else {
-          setIsResultVisible({
-            errors: ['Для виконання програми недостатньо коду'],
-            value: false,
-          })
-        }
-      }    
+  const handleShowResult = () => {
+    if (checkIsAllRequiredStagesChecked()) {
+      setIsResultVisible({ errors: [], value: true })
+    } else {
+      setIsResultVisible({
+        errors: ['Для виконання програми недостатньо коду'],
+        value: false,
+      })
+    }
+  }
 
   return (
     <>
@@ -44,7 +49,9 @@ export const Selector = ({ task, checkedStagesId, isResultVisible, setIsResultVi
         <Stack spacing={2} mt={2}>
           {isResultVisible.errors.length >= 1 &&
             isResultVisible.errors.map((error) => (
-              <Alert severity="error">{error}</Alert>
+              <Alert key={error} severity="error">
+                {error}
+              </Alert>
             ))}
         </Stack>
       </Box>
